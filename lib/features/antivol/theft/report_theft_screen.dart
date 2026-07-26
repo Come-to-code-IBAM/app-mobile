@@ -5,7 +5,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../shared/widgets/labeled_field.dart';
 import '../../../shared/widgets/section_header.dart';
 
-/// Signaler un vol : sélectionner l'animal puis décrire les circonstances.
+/// Signaler une disparition : sélectionner l'animal puis décrire les circonstances.
 class ReportTheftScreen extends StatelessWidget {
   const ReportTheftScreen({super.key});
 
@@ -13,11 +13,11 @@ class ReportTheftScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Signaler un vol')),
+      appBar: AppBar(title: const Text('Signaler une disparition')),
       body: ListView(
         padding: AppSpacing.screen,
         children: [
-          const SectionHeader(eyebrow: 'Animal', title: 'Lequel a été volé ?'),
+          const SectionHeader(eyebrow: 'Animal', title: 'Lequel a disparu ?'),
           const SizedBox(height: AppSpacing.md),
           TextField(
             decoration: const InputDecoration(

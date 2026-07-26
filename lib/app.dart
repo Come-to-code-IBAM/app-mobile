@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/config/constants.dart';
 import 'core/theme/app_theme.dart';
+import 'features/auth/login_screen.dart';
 import 'features/shell/home_shell.dart';
 import 'features/splash/splash_screen.dart';
 
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
   const App({super.key});
 
   static const String routeSplash = '/';
+  static const String routeLogin = '/login';
   static const String routeHome = '/home';
 
   @override
@@ -26,6 +28,7 @@ class App extends StatelessWidget {
       initialRoute: routeSplash,
       routes: {
         routeSplash: (_) => const SplashScreen(),
+        routeLogin: (_) => const LoginScreen(),
         routeHome: (_) => const HomeShell(),
       },
     );
