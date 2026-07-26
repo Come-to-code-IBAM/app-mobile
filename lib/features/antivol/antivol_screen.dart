@@ -8,11 +8,12 @@ import '../../shared/widgets/section_header.dart';
 import '../../shared/widgets/status_badge.dart';
 import 'animal_detail_screen.dart';
 import 'enroll/enroll_capture_screen.dart';
+import 'found/found_capture_screen.dart';
 import 'herd/herd_list_screen.dart';
 import 'theft/report_theft_screen.dart';
 import 'verify/verify_capture_screen.dart';
 
-/// Module Anti-vol : enrôler, vérifier, signaler un vol.
+/// Module Anti-vol : enrôler, vérifier, signaler une disparition.
 class AntivolScreen extends StatelessWidget {
   const AntivolScreen({super.key});
 
@@ -57,10 +58,17 @@ class AntivolScreen extends StatelessWidget {
                     ),
                     ModuleTile(
                       icon: Icons.report_gmailerrorred_outlined,
-                      title: 'Signaler un vol',
-                      subtitle: 'Marquer un animal comme volé',
+                      title: 'Signaler une disparition',
+                      subtitle: 'Marquer un animal comme disparu',
                       accent: ModuleAccents.antivol,
                       onTap: () => _open(context, const ReportTheftScreen()),
+                    ),
+                    ModuleTile(
+                      icon: Icons.center_focus_weak_outlined,
+                      title: 'Animal retrouvé',
+                      subtitle: 'Scanner un animal retrouvé pour le signaler',
+                      accent: ModuleAccents.antivol,
+                      onTap: () => _open(context, const FoundCaptureScreen()),
                     ),
                     ModuleTile(
                       icon: Icons.inventory_2_outlined,
