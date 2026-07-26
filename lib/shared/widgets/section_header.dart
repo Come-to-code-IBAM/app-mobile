@@ -33,8 +33,8 @@ class SectionHeader extends StatelessWidget {
   }
 }
 
-/// Marque de l'application : le monogramme entre chevrons, clin d'œil au logo
-/// C2I « <C2I/> » de l'affiche, décliné pour le carnet du troupeau.
+/// Marque de l'application : le logo, dans une carte claire pour rester lisible
+/// aussi bien sur fond sombre (splash) que sur fond clair.
 class BrandMark extends StatelessWidget {
   const BrandMark({super.key, this.compact = false});
 
@@ -43,38 +43,21 @@ class BrandMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final logoHeight = compact ? 32.0 : 40.0;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.sm + 2,
-            vertical: AppSpacing.xs + 2,
+          padding: const EdgeInsets.all(AppSpacing.xs),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(AppRadius.rMd),
           ),
-          decoration: BoxDecoration(
-            color: AppColors.navy,
-            borderRadius: const BorderRadius.all(AppRadius.rMd),
-          ),
-          child: Text.rich(
-            TextSpan(
-              children: [
-                const TextSpan(
-                  text: '<',
-                  style: TextStyle(color: AppColors.greenBright),
-                ),
-                TextSpan(
-                  text: 'Troupeau',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const TextSpan(
-                  text: '/>',
-                  style: TextStyle(color: AppColors.greenBright),
-                ),
-              ],
-            ),
+          clipBehavior: Clip.antiAlias,
+          child: Image.asset(
+            'assets/images/logo.jpeg',
+            height: logoHeight,
+            fit: BoxFit.contain,
           ),
         ),
         if (!compact) ...[
