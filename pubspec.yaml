@@ -1,0 +1,31 @@
+name: carnet_troupeau
+description: "Carnet numérique du troupeau — anti-vol, ration, transhumance."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Stockage local hors ligne
+  sqflite: ^2.3.3
+  path: ^1.9.0
+
+  # Réseau / API serveur
+  http: ^1.2.2
+
+  # Préférences simples (endpoint serveur, dernière synchro…)
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
