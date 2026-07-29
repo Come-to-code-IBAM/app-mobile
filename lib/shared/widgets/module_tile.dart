@@ -52,7 +52,12 @@ class ModuleTile extends StatelessWidget {
                 child: Icon(icon, color: accent, size: 26),
               ),
               const SizedBox(height: AppSpacing.md),
-              Text(title, style: theme.textTheme.titleMedium),
+              Text(
+                title,
+                style: theme.textTheme.titleMedium,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 subtitle,

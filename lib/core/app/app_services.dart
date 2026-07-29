@@ -8,6 +8,7 @@ import '../sync/sync_service.dart';
 import '../../data/repositories/animal_repository.dart';
 import '../../data/repositories/ration_repository.dart';
 import '../../data/repositories/zone_repository.dart';
+import 'package:sqflite/sqflite.dart' as sqflite;
 
 /// Point d'entrée des dépendances partagées de l'application.
 ///
@@ -41,13 +42,42 @@ class AppServices {
 
   final SyncService syncService;
 
-  /// Construit et câble toutes les dépendances. À implémenter.
-  static Future<AppServices> create() {
-    throw UnimplementedError();
+  /// Construit et câble toutes les dépendances.
+  static Future<AppServices> create() async {
+    final database = AppDatabase();
+    await database.open();
+
+    final api = ApiClient();
+    final animalsDao = AnimalsDao(database);
+    final rationsDao = RationsDao(database);
+    final zonesDao = ZonesDao(database);
+    final syncDao = SyncDao(database);
+
+    final animalRepository = AnimalRepository();
+    final rationRepository = RationRepository(
+      rationsDao: rationsDao,
+      syncDao: syncDao,
+      apiClient: api,
+    );
+    final zoneRepository = ZoneRepository();
+    final syncService = SyncService(syncDao: syncDao, apiClient: api);
+
+    return AppServices._(
+      api: api,
+      database: database,
+      animalsDao: animalsDao,
+      rationsDao: rationsDao,
+      zonesDao: zonesDao,
+      syncDao: syncDao,
+      animalRepository: animalRepository,
+      rationRepository: rationRepository,
+      zoneRepository: zoneRepository,
+      syncService: syncService,
+    );
   }
 
   /// Déclenche une synchronisation opportuniste avec le serveur.
-  Future<void> sync() {
-    throw UnimplementedError();
+  Future<void> sync() async {
+    await syncService.syncNow();
   }
 }

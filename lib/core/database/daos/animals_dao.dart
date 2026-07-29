@@ -1,9 +1,14 @@
 import '../../../data/models/animal.dart';
+import '../app_database.dart';
 
 /// Accès local aux animaux enrôlés (table `local_animal`).
 class AnimalsDao {
-  Future<List<Animal>> all() => throw UnimplementedError();
-  Future<Animal?> byLocalUuid(String localUuid) => throw UnimplementedError();
-  Future<void> upsert(Animal animal) => throw UnimplementedError();
-  Future<void> markStolen(String localUuid) => throw UnimplementedError();
+  AnimalsDao(this._database);
+
+  final AppDatabase _database;
+
+  Future<List<Animal>> all() async => <Animal>[];
+  Future<Animal?> byLocalUuid(String localUuid) async => null;
+  Future<void> upsert(Animal animal) async {}
+  Future<void> markStolen(String localUuid) async {}
 }
