@@ -10,6 +10,7 @@ import '../../data/repositories/ration_repository.dart';
 import '../../data/repositories/zone_repository.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
+
 /// Point d'entrée des dépendances partagées de l'application.
 ///
 /// Assemblé une seule fois au démarrage, puis exposé à l'arbre de widgets via
@@ -53,7 +54,11 @@ class AppServices {
     final zonesDao = ZonesDao(database);
     final syncDao = SyncDao(database);
 
-    final animalRepository = AnimalRepository();
+    final animalRepository = AnimalRepository(
+      animalsDao: animalsDao,
+      syncDao:    syncDao,
+      apiClient:  api,
+    );
     final rationRepository = RationRepository(
       rationsDao: rationsDao,
       syncDao: syncDao,

@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 
-/// Étape 3 de l'enrôlement : confirmation + identifiant attribué.
+/// Étape 3 de l'enrôlement : confirmation + identifiant local attribué.
 class EnrollSuccessScreen extends StatelessWidget {
-  const EnrollSuccessScreen({super.key});
+  const EnrollSuccessScreen({super.key, required this.localUuid});
+
+  final String localUuid;
+
+  // Identifiant court lisible (8 premiers caractères du uuid).
+  String get _shortId => localUuid.replaceAll('-', '').substring(0, 8).toUpperCase();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class EnrollSuccessScreen extends StatelessWidget {
             Container(
               width: 88,
               height: 88,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.successLight,
                 shape: BoxShape.circle,
               ),
@@ -43,19 +48,19 @@ class EnrollSuccessScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text('Identifiant de l\'animal', style: theme.textTheme.labelMedium),
+                  Text('Identifiant local', style: theme.textTheme.labelMedium),
                   const SizedBox(height: AppSpacing.xs),
-                  Text('TRP-8F3A-2K', style: theme.textTheme.headlineSmall),
+                  Text('TRP-$_shortId', style: theme.textTheme.headlineSmall),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    'L\'identifiant définitif sera assigné après synchro.',
+                    style: theme.textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
             const Spacer(),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.qr_code_2_outlined),
-              label: const Text('Imprimer / partager l\'identifiant'),
-            ),
-            const SizedBox(height: AppSpacing.sm),
             FilledButton(
               onPressed: () => Navigator.of(context).popUntil((r) => r.isFirst),
               child: const Text('Terminer'),
